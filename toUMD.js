@@ -1,12 +1,18 @@
+/**
+* @description normal function conversion UMD module function
+* @param name String module name
+* @param factory Function module action
+* @param depends [Array, String...]  依赖
+* @use toUMD('test_module', function(){})([jQuery, lodash], 'jquery', '_');
+*/
 "use strict";
 
 window.toUMD = function(name, factory){
 
-	return function(depends){
+	return function(){
 
-		var global_args = Array.prototype.slice.call(arguments, 1);
-
-		depends = [].concat(depends);
+		var depends = Array.prototype.slice.call(arguments),
+			global_args = depends.shift();
 
 		if (typeof define === 'function' && define.amd) {
 			define(
